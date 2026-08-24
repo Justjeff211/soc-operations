@@ -1,0 +1,28 @@
+%% Alert Prioritisation Decision Tree
+%% A repeatable model for ranking SOC alerts using consistent criteria rather than assumption or recency bias
+
+flowchart TD
+
+    A["Alert Received"] --> B{"Confidence Level: is this a confirmed detection or a low fidelity heuristic alert?"}
+    B -->|"Low Confidence"| B1["Flag for Correlation, Monitor for Related Activity"]
+    B -->|"Confirmed or High Confidence"| C{"Active Exploitation Indicators Present?"}
+
+    C -->|"Yes"| D{"Privileged or Admin Account Involved?"}
+    C -->|"No"| G{"Business Critical Asset Affected?"}
+
+    D -->|"Yes"| PCRIT["Priority: Critical, Immediate Containment"]
+    D -->|"No"| E{"Business Critical Asset Affected?"}
+
+    E -->|"Yes"| PCRIT
+    E -->|"No"| F{"Sensitive Data Involved?"}
+
+    F -->|"Yes"| PHIGH["Priority: High, Rapid Investigation"]
+    F -->|"No"| PMED["Priority: Medium, Scheduled Investigation"]
+
+    G -->|"Yes"| H{"Attack Indicators Present, Even if Unconfirmed?"}
+    G -->|"No"| PLOW["Priority: Low, Routine Handling or Route to Relevant Team"]
+
+    H -->|"Yes"| PHIGH
+    H -->|"No"| PMED
+
+    B1 --> PLOW
