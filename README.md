@@ -63,3 +63,18 @@ SOC-Operations/
     ├── triage-notes.md
     └── incident-report-template.md
 ```
+## Connect With Me
+
+I'm always interested in connecting with people working in cybersecurity, SOC operations, cloud security, and Blue Team engineering.
+
+If you found this project useful, have suggestions for improving the workflows, or want to discuss SOC operations and incident response, feel free to reach out.
+
+**GitHub:** [@Justjeff211](https://github.com/Justjeff211)
+
+**LinkedIn:** [Mojalefa Letsoara](https://www.linkedin.com/in/mojalefa-l-letsoara283b5a211/)
+
+**Projects:** [View my other cybersecurity projects](https://github.com/Justjeff211)
+
+----------
+
+_Built as part of my ongoing journey into Security Operations and Blue Team engineering._
