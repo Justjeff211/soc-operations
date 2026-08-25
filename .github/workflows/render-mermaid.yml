@@ -29,7 +29,8 @@ jobs:
         run: npm install -g @mermaid-js/mermaid-cli
 
       - name: Create Puppeteer config for CI
-        run: echo '{"args": ["--no-sandbox", "--disable-setuid-sandbox"]}' > puppeteer-config.json
+        run: |
+          echo '{"args": ["--no-sandbox", "--disable-setuid-sandbox"]}' > puppeteer-config.json
 
       - name: Test and render each diagram to SVG
         run: |
