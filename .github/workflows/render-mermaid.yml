@@ -1,4 +1,4 @@
-    name: Render Mermaid Diagrams
+name: Render Mermaid Diagrams
 
 on:
   push:
@@ -28,16 +28,13 @@ jobs:
       - name: Install Mermaid CLI
         run: npm install -g @mermaid-js/mermaid-cli
 
-      - name: Create Puppeteer config for CI
-        run: echo '{"args": ["--no-sandbox", "--disable-setuid-sandbox"]}' > puppeteer-config.json
-
       - name: Test and render each diagram to SVG
         run: |
           mkdir -p architecture/svg
           for f in architecture/*.mmd; do
             name=$(basename "$f" .mmd)
             echo "Rendering $f"
-            mmdc -i "$f" -o "architecture/svg/${name}.svg" -b transparent -p puppeteer-config.json
+            mmdc -i "$f" -o "architecture/svg/${name}.svg" -b transparent
           done
 
       - name: Upload SVGs as a workflow artifact
@@ -54,5 +51,3 @@ jobs:
           git add architecture/svg
           git diff --staged --quiet || git commit -m "Auto-render Mermaid diagrams to SVG [skip ci]"
           git push
-
-    
