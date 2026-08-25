@@ -1,0 +1,77 @@
+%% MDR and MXDR Service Model
+%% Shows how a managed security provider delivers detection and response services, from customer telemetry through SOC roles to customer communication
+
+flowchart TB
+
+    subgraph CE["Customer Environment"]
+        direction TB
+        CE1["Endpoints"]
+        CE2["Servers"]
+        CE3["Cloud Workloads"]
+        CE4["Network Devices"]
+        CE5["Identity Providers"]
+    end
+
+    subgraph DCL["Data Collection Layer"]
+        direction TB
+        DC1["Agents"]
+        DC2["Collectors"]
+        DC3["APIs"]
+        DC4["Connectors"]
+    end
+
+    subgraph SOC["MSSP / MDR SOC"]
+        direction TB
+        S1["Monitoring"]
+        S2["Detection Engineering"]
+        S3["Threat Hunting"]
+        S4["Incident Response"]
+        S5["Reporting"]
+    end
+
+    subgraph ROLES["SOC Roles"]
+        direction TB
+        R1["L1 Analyst"]
+        R2["L2 Analyst"]
+        R3["L3 Threat Hunter / Incident Responder"]
+        R4["SOC Manager"]
+    end
+
+    subgraph COMMS["Customer Communication"]
+        direction TB
+        C1["Ticketing"]
+        C2["Incident Notification"]
+        C3["Reports"]
+        C4["Recommendations"]
+    end
+
+    CE1 --> DC1
+    CE2 --> DC1
+    CE3 --> DC3
+    CE4 --> DC2
+    CE5 --> DC4
+
+    DC1 --> S1
+    DC2 --> S1
+    DC3 --> S1
+    DC4 --> S1
+
+    S1 --> R1
+    R1 --> R2
+    R2 --> R3
+    R3 --> R4
+
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
+    S4 --> S5
+
+    R1 --> C1
+    R3 --> C2
+    S5 --> C3
+    R4 --> C4
+
+    C1 --> CE1
+    C2 --> CE1
+    C3 --> CE1
+    C4 --> CE1
